@@ -1,4 +1,5 @@
 const express = require("express");
+const userRoute = require("./routes/user");
 const productRoute = require("./routes/products");
 const app = express();
 
@@ -8,6 +9,7 @@ app.get("/", (req, res) => {
   });
 });
 
+app.use("/auth", userRoute);
 app.use("/products", productRoute);
 
 app.listen(3000, console.log("Server Started!"));

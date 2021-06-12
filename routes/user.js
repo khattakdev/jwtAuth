@@ -1,17 +1,31 @@
 const express = require("express");
-
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.post("/register", (req, res) => {
   res.json({
-    msg: "All Products Fetched!",
+    msg: "Register",
   });
 });
 
-router.post("/", (req, res) => {
-  res.json({
-    msg: "Product Added!",
+router.post("/login", (req, res) => {
+  // User.findOne({ email });
+
+  const jwtUser = {
+    username: "khattakdev",
+    email: "me@khattak.dev",
+  };
+  jwt.sign(jwtUser, "githubEducation", (err, token) => {
+    if (err) {
+      return res.status(500).json({
+        error: "Something went wrong!",
+      });
+    }
+    return res.json({ token });
   });
+  //   res.json({
+  //     msg: "Login",
+  //   });
 });
 
 module.exports = router;
